@@ -161,13 +161,15 @@ export interface Media {
   focalY?: number | null;
 }
 /**
+ * Your personal development library.
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "snippets".
  */
 export interface Snippet {
   id: number;
   title: string;
-  type: 'Laravel' | 'Blade' | 'Tailwind' | 'Alpine' | 'Git' | 'Terminal' | 'Regex' | 'UI Pattern' | 'React' | 'Other';
+  type: 'Laravel' | 'Blade' | 'Tailwind' | 'Alpine' | 'Git' | 'Terminal' | 'Regex' | 'UI Pattern' | 'Other';
   description?: {
     root: {
       type: string;
