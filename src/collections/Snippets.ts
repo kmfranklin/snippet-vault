@@ -9,6 +9,21 @@ export const Snippets: CollectionConfig = {
   access: {
     read: () => true,
   },
+  hooks: {
+    afterRead: [
+      async ({ doc }) => {
+        // If description is still in richText format (object with root), convert to string
+        if (doc.description && typeof doc.description === 'object' && doc.description.root) {
+          doc.description = JSON.stringify(doc.description)
+        }
+        // Same for notes if it exists
+        if (doc.notes && typeof doc.notes === 'object' && doc.notes.root) {
+          doc.notes = JSON.stringify(doc.notes)
+        }
+        return doc
+      },
+    ],
+  },
   admin: {
     useAsTitle: 'title',
     defaultColumns: ['title', 'type', 'tags'],
@@ -39,7 +54,7 @@ export const Snippets: CollectionConfig = {
     },
     {
       name: 'description',
-      type: 'richText',
+      type: 'textarea',
     },
     {
       name: 'code',

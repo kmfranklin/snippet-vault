@@ -170,21 +170,7 @@ export interface Snippet {
   id: number;
   title: string;
   type: 'Laravel' | 'Blade' | 'Tailwind' | 'Alpine' | 'Git' | 'Terminal' | 'Regex' | 'UI Pattern' | 'Other';
-  description?: {
-    root: {
-      type: string;
-      children: {
-        type: any;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
+  description?: string | null;
   code: string;
   tags?:
     | {

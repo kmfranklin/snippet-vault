@@ -16,8 +16,28 @@ export async function fetchSnippets() {
 }
 
 export async function fetchSnippet(id: string) {
-  const res = await fetch(`${API_URL}/api/snippets/${id}`)
-  return res.json()
+  try {
+    const res = await fetch(`${API_URL}/api/snippets/${id}`)
+    if (!res.ok) {
+      console.error('Failed to fetch snippet:', res.status, res.statusText)
+      return {}
+    }
+    const snippet = await res.json()
+
+    // If description is still in richText format, convert to string
+    if (
+      snippet.description &&
+      typeof snippet.description === 'object' &&
+      snippet.description.root
+    ) {
+      snippet.description = 'Rich text content'
+    }
+
+    return snippet
+  } catch (error) {
+    console.error('Error fetching snippet:', error)
+    return {}
+  }
 }
 
 export async function createSnippet(data: any) {

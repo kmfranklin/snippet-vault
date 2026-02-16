@@ -10,8 +10,10 @@ export default async function SnippetListPage() {
       <ul style={{ marginTop: '1rem', lineHeight: '1.8' }}>
         {snippets.map((s: any) => (
           <li key={s.id}>
-            <strong>{s.title}</strong>
-            <span style={{ opacity: 0.6 }}>({s.type})</span>
+            <a href={`/snippets/${s.id}`}>
+              <strong>{s.title}</strong>
+            </a>
+            <span style={{ opacity: 0.6 }}> ({s.type})</span>
           </li>
         ))}
       </ul>
