@@ -1,9 +1,18 @@
 const API_URL = process.env.NEXT_PUBLIC_PAYLOAD_URL || 'http://localhost:3000'
 
 export async function fetchSnippets() {
-  const res = await fetch(`${API_URL}/api/snippets?limit=100`)
-  const data = await res.json()
-  return data.docs
+  try {
+    const res = await fetch(`${API_URL}/api/snippets?limit=100`)
+    if (!res.ok) {
+      console.error('Failed to fetch snippets:', res.status, res.statusText)
+      return []
+    }
+    const data = await res.json()
+    return data.docs || []
+  } catch (error) {
+    console.error('Error fetching snippets:', error)
+    return []
+  }
 }
 
 export async function fetchSnippet(id: string) {

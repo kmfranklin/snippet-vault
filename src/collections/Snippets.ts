@@ -6,6 +6,9 @@ export const Snippets: CollectionConfig = {
     singular: 'Snippet',
     plural: 'Snippets',
   },
+  access: {
+    read: () => true,
+  },
   admin: {
     useAsTitle: 'title',
     defaultColumns: ['title', 'type', 'tags'],
